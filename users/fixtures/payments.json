@@ -6,6 +6,7 @@
         "user": 1,
         "payment_data": "2024-03-01",
         "course": 1,
+        "lesson": null,
         "payment_sum": 10000,
         "payment_method": "transaction"
     }
@@ -16,6 +17,7 @@
     "fields": {
         "user": 1,
         "payment_data": "2024-02-01",
+        "course": null,
         "lesson": 1,
         "payment_sum": 2000,
         "payment_method": "cash"
