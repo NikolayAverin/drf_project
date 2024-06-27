@@ -17,6 +17,7 @@ black = "^24.4.2"
 ipython = "^8.25.0"
 isort = "^5.13.2"
 django-filter = "^24.2"
+djangorestframework-simplejwt = "^5.3.1"
 
 
 [build-system]
