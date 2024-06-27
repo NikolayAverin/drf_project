@@ -18,7 +18,13 @@ class Course(models.Model):
         verbose_name="Превью",
         help_text="Загрузите превью для курса",
     )
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Создатель курса")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        verbose_name="Создатель курса",
+    )
 
     def __str__(self):
         return self.title
@@ -50,7 +56,13 @@ class Lesson(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, verbose_name="Курс", help_text="Выберите курс"
     )
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Создатель урока")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        verbose_name="Создатель урока",
+    )
 
     def __str__(self):
         return self.title
