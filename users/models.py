@@ -49,7 +49,7 @@ class User(AbstractUser):
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Плательщик")
-    payment_data = models.DateField(verbose_name="Дата оплаты")
+    payment_data = models.DateField(verbose_name="Дата оплаты", auto_now_add=True)
     course = models.ForeignKey(
         Course,
         null=True,
