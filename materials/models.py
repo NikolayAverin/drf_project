@@ -51,7 +51,10 @@ class Lesson(models.Model):
         help_text="Загрузите превью для курса",
     )
     video = models.URLField(
-        verbose_name="Видеоурок", help_text="Введите ссылку на видео с уроком"
+        verbose_name="Видеоурок",
+        help_text="Введите ссылку на видео с уроком",
+        blank=True,
+        null=True,
     )
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, verbose_name="Курс", help_text="Выберите курс"
@@ -70,3 +73,24 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        verbose_name="Подписчик",
+    )
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Курс"
+    )
+
+    def __str__(self):
+        return f"{self.user} подписан на {self.course}"
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+        unique_together = ("user", "course")  # уникальная связка
