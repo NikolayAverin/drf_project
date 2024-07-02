@@ -101,13 +101,13 @@ class LessonTestCase(APITestCase):
         )
         self.client.force_authenticate(user=self.user)
 
-    # def test_lesson_create(self):
-    #     url = reverse("materials:lessons_create")
-    #     data = {'title': 'Test Lesson 2', 'description': 'Test Lesson 2 description', 'video': 'youtube.com', 'course': self.course.pk}
-    #     response = self.client.post(url, data)
-    #     print(response.json())
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    #     self.assertEqual(Lesson.objects.count(), 2)
+    def test_lesson_create(self):
+        url = reverse("materials:lessons_create")
+        data = {'title': 'Test Lesson 2', 'description': 'Test Lesson 2 description', 'video': 'http://www.youtube.com/watch?v=DFYRQ_zQ-gk', 'course': self.course.pk}
+        response = self.client.post(url, data)
+        print(response.json())
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Lesson.objects.count(), 2)
 
     def test_lesson_list(self):
         url = reverse("materials:lessons_list")

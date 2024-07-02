@@ -67,7 +67,7 @@ class PaymentTestCase(APITestCase):
             {
                 "id": self.payment.pk,
                 "user": self.user.pk,
-                "payment_data": "2024-07-01",
+                "payment_data": "2024-07-02",
                 "course": None,
                 "lesson": None,
                 "payment_sum": self.payment.payment_sum,
