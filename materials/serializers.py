@@ -7,6 +7,7 @@ from materials.validators import VideoUrlValidator
 
 
 class LessonSerializer(ModelSerializer):
+    """Сериализатор урока"""
     video = serializers.URLField(validators=[VideoUrlValidator()])
 
     class Meta:
@@ -15,6 +16,7 @@ class LessonSerializer(ModelSerializer):
 
 
 class SubscriptionSerializer(ModelSerializer):
+    """Сериализатор подписки"""
 
     class Meta:
         model = Subscription
@@ -22,9 +24,9 @@ class SubscriptionSerializer(ModelSerializer):
 
 
 class CourseSerializer(ModelSerializer):
+    """Сериализатор курса"""
     count_lessons = SerializerMethodField()
     lessons = LessonSerializer(source="lesson_set", many=True, read_only=True)
-    # subscriptions = SubscriptionSerializer(source="subscription_set", many=True, read_only=True)
     is_subscribed = SerializerMethodField()
 
     def get_is_subscribed(self, instance):

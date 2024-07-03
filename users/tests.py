@@ -6,12 +6,14 @@ from users.models import Payment, User
 
 
 class UserTestCase(APITestCase):
+    """Тесты для пользователя"""
 
     def setUp(self):
         self.user = User.objects.create(email="test@test.com")
         self.client.force_authenticate(user=self.user)
 
     def test_user_register(self):
+        """Регистрация пользователя"""
         url = reverse("users:register")
         data = {"email": "test2@test.com", "password": "111111"}
         response = self.client.post(url, data)
@@ -19,6 +21,7 @@ class UserTestCase(APITestCase):
         self.assertEqual(User.objects.count(), 2)
 
     def test_user_list(self):
+        """Получение списка всех пользователей"""
         url = reverse("users:users")
         response = self.client.get(url)
         data = response.json()
@@ -29,6 +32,7 @@ class UserTestCase(APITestCase):
         self.assertEqual(data, result)
 
     def test_user_retrieve(self):
+        """Получение информации о конкретном пользователе"""
         url = reverse("users:user_detail", args=(self.user.pk,))
         response = self.client.get(url)
         data = response.json()
@@ -36,6 +40,7 @@ class UserTestCase(APITestCase):
         self.assertEqual(data["email"], self.user.email)
 
     def test_user_update(self):
+        """Изменение информации о конкретном пользователе"""
         url = reverse("users:user_update", args=(self.user.pk,))
         data = {"city": "Test city"}
         response = self.client.patch(url, data)
@@ -44,6 +49,7 @@ class UserTestCase(APITestCase):
         self.assertEqual(data["city"], "Test city")
 
     def test_user_delete(self):
+        """Удаление конкретного пользователя"""
         url = reverse("users:user_delete", args=(self.user.pk,))
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -51,6 +57,7 @@ class UserTestCase(APITestCase):
 
 
 class PaymentTestCase(APITestCase):
+    """Тесты для платежей"""
 
     def setUp(self):
         self.user = User.objects.create(email="test@test.com")
@@ -60,6 +67,7 @@ class PaymentTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_payment_list(self):
+        """Получение списка всех платежей пользователя"""
         url = reverse("users:payments")
         response = self.client.get(url)
         data = response.json()
