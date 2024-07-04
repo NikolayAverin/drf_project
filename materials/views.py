@@ -14,6 +14,8 @@ from users.permissions import IsModerators, IsOwner
 
 
 class CourseViewSet(ModelViewSet):
+    """Вьюсет для модели курса"""
+
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CustomPagination
@@ -36,6 +38,8 @@ class CourseViewSet(ModelViewSet):
 
 
 class LessonCreateApiView(CreateAPIView):
+    """Создание урока"""
+
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = (~IsModerators, IsAuthenticated)
@@ -48,6 +52,8 @@ class LessonCreateApiView(CreateAPIView):
 
 
 class LessonListApiView(ListAPIView):
+    """Вывод списка уроков"""
+
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsModerators | IsAuthenticated]
@@ -55,24 +61,32 @@ class LessonListApiView(ListAPIView):
 
 
 class LessonRetrieveApiView(RetrieveAPIView):
+    """Вывод одного урока"""
+
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsModerators | IsOwner]
 
 
 class LessonUpdateApiView(UpdateAPIView):
+    """Обновление урока"""
+
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsModerators | IsOwner]
 
 
 class LessonDestroyApiView(DestroyAPIView):
+    """Удаление урока"""
+
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [~IsModerators | IsOwner]
 
 
 class SubscriptionApiView(APIView):
+    """Подписка на курс"""
+
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
     permission_classes = (IsAuthenticated,)

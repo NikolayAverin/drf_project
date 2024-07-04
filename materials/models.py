@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Course(models.Model):
+    """Модель курса"""
+
     title = models.CharField(
         max_length=150,
         verbose_name="Название курса",
@@ -25,6 +27,9 @@ class Course(models.Model):
         null=True,
         verbose_name="Создатель курса",
     )
+    cost = models.PositiveIntegerField(
+        verbose_name="Цена курса", help_text="Укажите цену курса", default=10000
+    )
 
     def __str__(self):
         return self.title
@@ -35,6 +40,8 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
+    """Модель урока"""
+
     title = models.CharField(
         max_length=150,
         verbose_name="Название урока",
@@ -66,6 +73,9 @@ class Lesson(models.Model):
         null=True,
         verbose_name="Создатель урока",
     )
+    cost = models.PositiveIntegerField(
+        verbose_name="Цена урока", help_text="Укажите цену урока", default=500
+    )
 
     def __str__(self):
         return self.title
@@ -76,6 +86,8 @@ class Lesson(models.Model):
 
 
 class Subscription(models.Model):
+    """Модель подписки на курс"""
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
