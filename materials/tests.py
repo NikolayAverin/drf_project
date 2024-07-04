@@ -112,7 +112,12 @@ class LessonTestCase(APITestCase):
     def test_lesson_create(self):
         """Создание урока"""
         url = reverse("materials:lessons_create")
-        data = {'title': 'Test Lesson 2', 'description': 'Test Lesson 2 description', 'video': 'http://www.youtube.com/watch?v=DFYRQ_zQ-gk', 'course': self.course.pk}
+        data = {
+            "title": "Test Lesson 2",
+            "description": "Test Lesson 2 description",
+            "video": "http://www.youtube.com/watch?v=DFYRQ_zQ-gk",
+            "course": self.course.pk,
+        }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Lesson.objects.count(), 2)
