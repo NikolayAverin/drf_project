@@ -10,6 +10,7 @@ from materials.models import Course, Lesson, Subscription
 from materials.paginations import CustomPagination
 from materials.serializers import (CourseSerializer, LessonSerializer,
                                    SubscriptionSerializer)
+from materials.tasks import send_new_lesson_email
 from users.permissions import IsModerators, IsOwner
 
 
@@ -48,6 +49,7 @@ class LessonCreateApiView(CreateAPIView):
         """Сохранение урока при создании"""
         lesson = serializer.save()
         lesson.owner = self.request.user
+        send_new_lesson_email.delay(lesson.course)
         lesson.save()
 
 
@@ -81,7 +83,7 @@ class LessonDestroyApiView(DestroyAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    permission_classes = [~IsModerators | IsOwner]
+    permission_classes = [~IsModerators, IsOwner]
 
 
 class SubscriptionApiView(APIView):
