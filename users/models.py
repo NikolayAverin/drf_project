@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
-
 from materials.models import Course, Lesson
 
 PAYMENT_METHOD = [
@@ -16,12 +14,6 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(
         unique=True, verbose_name="Почта", help_text="Укажите свою почту"
-    )
-    phone = PhoneNumberField(
-        null=True,
-        blank=True,
-        verbose_name="Телефон",
-        help_text="Укажите свой номер телефона",
     )
     city = models.CharField(
         max_length=100,
